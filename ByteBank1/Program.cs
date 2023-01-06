@@ -81,7 +81,7 @@ namespace ByteBank1 {
 
             if (cpfIndex == -1)
             {
-                Console.WriteLine("Usuário ou senha inválidos!");
+                Console.WriteLine("USUÁRIO OU SENHA INVÁLIDOS!");
             }
             else
             {
@@ -113,22 +113,22 @@ namespace ByteBank1 {
             Console.Write("Digite senha da conta: ");
             string senha = Console.ReadLine();
 
-            if (senha == senhas[indexUsuario])
+            if (senha != senhas[indexUsuario])
             {
-                if (valor > saldos[indexUsuario])
-                {
-                    Console.WriteLine($"Saldo insuficiente! Seu saldo na conta é de R$ {saldos[indexUsuario]}");
-                }
-                else
-                {
-                    saldos[indexUsuario] -= valor;
-                    Console.WriteLine($"Saque efetuado com sucesso! Seu saldo agora é de R$ {saldos[indexUsuario]}");
-                }
+                Console.WriteLine("SENHA INVÁLIDA!");
+                return;
+            }
+
+            if (valor > saldos[indexUsuario])
+            {
+                Console.WriteLine($"Saldo insuficiente! Seu saldo é de R$ {saldos[indexUsuario]}");
             }
             else
             {
-                Console.WriteLine("SENHA INVÁLIDA!");
+                saldos[indexUsuario] -= valor;
+                Console.WriteLine($"Saque efetuado com sucesso! Seu saldo é de R$ {saldos[indexUsuario]}");
             }
+
         }
 
         static void DepositarConta(int indexUsuario, List<double> saldos)
@@ -148,11 +148,17 @@ namespace ByteBank1 {
 
             if(indexParaTransferir == -1)
             {
-                Console.WriteLine("Conta Inválida!");
+                Console.WriteLine("CONTA DIGITADA INVÁLIDA!");
                 return;
             }
 
-            Console.Write("Digite senha da conta: ");
+            if (indexParaTransferir == indexUsuario) 
+            {
+                Console.WriteLine("NÃO É POSSÍVEL TRANSFERIR PARA A MESMA CONTA!");
+                return;
+            }
+
+            Console.Write("Digite a senha da conta: ");
             string senha = Console.ReadLine();
 
             if (senha != senhas[indexUsuario])
@@ -167,7 +173,7 @@ namespace ByteBank1 {
 
             if (valor > saldos[indexUsuario])
             {
-                Console.WriteLine($"Saldo insuficiente! Seu saldo na conta é de {saldos[indexUsuario]}");
+                Console.WriteLine($"Saldo insuficiente! Seu saldo é de {saldos[indexUsuario]}");
             }
             else
             {
@@ -176,7 +182,6 @@ namespace ByteBank1 {
         }
             
             
-
         static void Transferir(int indexUsuario, int indexParaTransferir, List<double> saldos, double valor)
         {
             saldos[indexUsuario] -= valor;
@@ -187,12 +192,13 @@ namespace ByteBank1 {
 
         static void MenuUsuario(int indexUsuario, List<string> cpfs, List<string> senhas, List<string> titulares, List<double> saldos)
         {
-            ApresentaConta(indexUsuario, cpfs, titulares, saldos);
+            
             
             int optionUsuario;
 
             do
             {
+                ApresentaConta(indexUsuario, cpfs, titulares, saldos);
                 ShowMenuUsuario();
                 optionUsuario = int.Parse(Console.ReadLine());
 
