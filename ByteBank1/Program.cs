@@ -121,12 +121,12 @@ namespace ByteBank1 {
 
             if (valor > saldos[indexUsuario])
             {
-                Console.WriteLine($"Saldo insuficiente! Seu saldo é de R$ {saldos[indexUsuario]}");
+                Console.WriteLine($"Saldo insuficiente! Seu saldo é de R$ {saldos[indexUsuario]:F2}");
             }
             else
             {
                 saldos[indexUsuario] -= valor;
-                Console.WriteLine($"Saque efetuado com sucesso! Seu saldo é de R$ {saldos[indexUsuario]}");
+                Console.WriteLine($"Saque efetuado com sucesso! Seu saldo é de R$ {saldos[indexUsuario]:F2}");
             }
 
         }
@@ -137,7 +137,7 @@ namespace ByteBank1 {
             double valor = double.Parse(Console.ReadLine());
 
             saldos[indexUsuario] += valor;
-            Console.WriteLine($"Depósito efetuado com sucesso! Seu saldo agora é de R$ {saldos[indexUsuario]}");
+            Console.WriteLine($"Depósito efetuado com sucesso! Seu saldo agora é de R$ {saldos[indexUsuario]:F2}");
         }
 
         static void ValidarTransferencia(int indexUsuario, List<string> cpfs, List<string> senhas, List<string> titulares, List<double> saldos)
@@ -173,7 +173,7 @@ namespace ByteBank1 {
 
             if (valor > saldos[indexUsuario])
             {
-                Console.WriteLine($"Saldo insuficiente! Seu saldo é de {saldos[indexUsuario]}");
+                Console.WriteLine($"Saldo insuficiente! Seu saldo é de R$ {saldos[indexUsuario]:F2}");
             }
             else
             {
@@ -182,11 +182,12 @@ namespace ByteBank1 {
         }
             
             
+
         static void Transferir(int indexUsuario, int indexParaTransferir, List<double> saldos, double valor)
         {
             saldos[indexUsuario] -= valor;
             saldos[indexParaTransferir] += valor;
-            Console.WriteLine($"Transferência realizada com sucesso! Seu saldo na conta é de {saldos[indexUsuario]}");
+            Console.WriteLine($"Transferência realizada com sucesso! Seu saldo na conta é de R$ {saldos[indexUsuario]:F2}");
         }
 
 
